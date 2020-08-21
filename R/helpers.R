@@ -13,7 +13,7 @@ getData <- function(connectionDetails,
   
   # age/gender
   standardCovariates <- FeatureExtraction::createCovariateSettings(useDemographicsGender = T, # exclude female
-                                                                   useDemographicsRace = , #exclude all but european/white
+                                                                   useDemographicsRace = T, #exclude all but european/white
                                                                    excludedCovariateConceptIds = c(8532,
                                                                                                    8557,44814660,38003572,38003574,38003578,38003597,44814659,38003577,38003589,38003596,38003600,38003602,44814655,38003613,8552,8516,38003580,38003593,38003604,38003598,38003615,38003599,44814656,38003605,8657,38003586,38003576,38003584,38003609,38003575,38003603,38003592,38003594,44814657,38003616,9178,8522,38003583,38003591,38003612,38003587,38003582,44814654,38003607,38003590,38003595,38003611,38003585,8515,38003573,38003606,38003579,38003581,38003588,38003601,38003608,38003610) )
   
@@ -39,7 +39,7 @@ getData <- function(connectionDetails,
   result <- tryCatch({PatientLevelPrediction::getPlpData(connectionDetails = connectionDetails,
                                      cdmDatabaseSchema = cdmDatabaseSchema,
                                      oracleTempSchema = oracleTempSchema, 
-                                     cohortId = ifelse(useFluCohort, 18041, B), 
+                                     cohortId = ifelse(useFluCohort, 18041, 18133), 
                                      outcomeIds = -999, 
                                      cohortDatabaseSchema = cohortDatabaseSchema, 
                                      outcomeDatabaseSchema = cohortDatabaseSchema, 
@@ -60,7 +60,7 @@ getData <- function(connectionDetails,
   charlson <- tryCatch({PatientLevelPrediction::getPlpData(connectionDetails = connectionDetails,
                                                          cdmDatabaseSchema = cdmDatabaseSchema,
                                                          oracleTempSchema = oracleTempSchema, 
-                                                         cohortId = ifelse(useFluCohort, 18041, B), 
+                                                         cohortId = ifelse(useFluCohort, 18041, 18133), 
                                                          outcomeIds = -999, 
                                                          cohortDatabaseSchema = cohortDatabaseSchema, 
                                                          outcomeDatabaseSchema = cohortDatabaseSchema, 

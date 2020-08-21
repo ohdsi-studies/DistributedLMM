@@ -40,7 +40,9 @@
     
     if(!useFluCohort){
       cohortsToCreate <-  cohortsToCreate[ cohortsToCreate$name!='flu test',]
-    }
+    } else{
+cohortsToCreate <-  cohortsToCreate[ cohortsToCreate$name!='covid_hosp',]
+}
     
     for (i in 1:nrow(cohortsToCreate)) {
       writeLines(paste("Creating cohort:", cohortsToCreate$name[i]))

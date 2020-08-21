@@ -83,6 +83,16 @@ addCohortNames <- function(data, IdColumnName = "cohortDefinitionId", nameColumn
   
   idToName <- data.frame(cohortId = c(cohortsToCreate$cohortId),
                          cohortName = c(as.character(cohortsToCreate$name)))
+
+# add custom covariates
+  pathToCsv <- system.file("settings", "CustomCovariates.csv", package = "DistributedLMM")
+if(file.exists(pathToCsv)){
+  cohortsToCreate2 <- utils::read.csv(pathToCsv)
+idToName <- rbind(idToName, data.frame(cohortId = cohortsToCreate2$atlasId,
+                                       cohortName = as.character(cohortsToCreate2$cohortName))
+                  )
+}
+
   idToName <- idToName[order(idToName$cohortId), ]
   idToName <- idToName[!duplicated(idToName$cohortId), ]
   names(idToName)[1] <- IdColumnName
