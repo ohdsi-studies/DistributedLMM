@@ -23,3 +23,83 @@ In this study we propose implementing a novel algorithm, distributed linear mixe
 
 The aim of this study is to demonstrate the ability to perform a distributed methodology across the OHDSI network to estimate the effect of various predictors of severe COVID-19 infection. We will implement the DLMMs methodology across the COVID-19 datasets within the OHDSI network to estimate the effect of various predictors on length of hospitalization stay (a proxy for severity of COVID-19 infection) that were identified as predictors of severity during the OHDSI COVID-19 study-a-thon.
 
+## Code to run:
+
+Make sure you have the R library PatientLevelPrediction version >= 4.0.0 installed, devtools and a Java runtime environment. Then install the study package:
+
+```r
+# 1) install the study package
+devtools::install_github('ohdsi-studies/DistributedLMM')
+```
+
+Next, either download extras/codeToRun.R and fill in the connection details or run:
+
+
+```r
+# 2) Now run the package
+library(DistributedLMM)
+# USER INPUTS
+#=======================
+# Specify where the temporary files (used by the ff package) will be created:
+options(andromedaTempFolder = "location with space to save big data")
+
+# The folder where the study intermediate and result files will be written:
+outputFolder <- "./DLMM"
+
+# Details for connecting to the server (type '?DatabaseConnector::createConnectionDetails' for info):
+dbms <- "you dbms"
+user <- 'your username'
+pw <- 'your password'
+server <- 'your server'
+port <- 'your port'
+
+connectionDetails <- DatabaseConnector::createConnectionDetails(dbms = dbms,
+                                                                server = server,
+                                                                user = user,
+                                                                password = pw,
+                                                                port = port)
+
+# Add the database containing the OMOP CDM data
+cdmDatabaseSchema <- 'cdm database schema'
+# Add the name of database containing the OMOP CDM data
+cdmDatabaseName <- 'cdm database name'
+
+# Add a database with read/write access as this is where the cohorts will be generated
+cohortDatabaseSchema <- 'work database schema'
+oracleTempSchema <- NULL
+
+
+# table name where the cohorts will be generated
+cohortTable <- 'DLMM'
+
+#============== Pick Study Parts To Run: ===========
+createCohorts = TRUE
+extractData = TRUE
+packageResults = TRUE
+
+minCellCount <- 5
+sampleSize <- NULL
+
+
+execute(connectionDetails = connectionDetails,
+        cdmDatabaseSchema = cdmDatabaseSchema,
+        cdmDatabaseName = cdmDatabaseName,
+        cohortDatabaseSchema = cohortDatabaseSchema,
+        cohortTable = cohortTable,
+        endDay = -1,
+        sampleSize = sampleSize,
+        outputFolder = outputFolder,
+        createCohorts = createCohorts,
+        useFluCohort = F,
+        extractData = extractData,
+        packageResults = packageResults,
+        minCellCount = minCellCount,
+        verbosity = "INFO",
+        cdmVersion = 5)
+
+```
+
+
+## Output
+
+After running the study, in [outputFolder], you will find a folder named [cdmDatabaseName].zip with all the results ready to export.  The unzipped version of this folder is the 'export' directory.  The files are: i) CohortCounts.csv (a csv with the number of patients in each cohort used as variables or the covid hospitalization cohort), ii) covNames.csv (a csv stating which column each variable was recorded in), iii) N.csv (a csv containing the number of patients in your covid hospitalization cohort), iv) XX.csv (a csv of the square matrix: t(X)X where X is the data matrix with rows representing patients and columns representing variables), v) Xy.csv (a csv containing a vector: t(X)y where y is the length of hospitalization vector) and vi) yy.csv (a csv containing an integer: t(y)y )
