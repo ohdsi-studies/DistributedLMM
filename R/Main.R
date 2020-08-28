@@ -108,7 +108,10 @@ execute <- function(connectionDetails,
   if (!file.exists(file.path(outputFolder,cdmDatabaseName)))
     dir.create(file.path(outputFolder,cdmDatabaseName), recursive = TRUE)
 
-  ParallelLogger::addDefaultFileLogger(file.path(outputFolder,cdmDatabaseName, "log.txt"))
+  ParallelLogger::addDefaultFileLogger(file.path(outputFolder, cdmDatabaseName, "log.txt"))
+  ParallelLogger::addDefaultErrorReportLogger(file.path(outputFolder, cdmDatabaseName, "errorReportR.txt"))
+  on.exit(ParallelLogger::unregisterLogger("DEFAULT_FILE_LOGGER", silent = TRUE))
+  on.exit(ParallelLogger::unregisterLogger("DEFAULT_ERRORREPORT_LOGGER", silent = TRUE), add = TRUE)
 
   if (createCohorts) {
     ParallelLogger::logInfo("Creating cohorts")

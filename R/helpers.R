@@ -89,23 +89,23 @@ createComponents <- function(plpData, charlson){
   
   # create charlson feature 0-1, 2-4, and ≥5
   charlson2to5 <- rep(0, nrow(plpData$cohorts))
-  ids <- charlson$covariateData$covariates %>% dplyr::filter(covariateValue < 5 & covariateValue >=2 ) %>% dplyr::select(rowId)
+  ids <- charlson$covariateData$covariates %>% dplyr::filter(.data$covariateValue < 5 & .data$covariateValue >=2 ) %>% dplyr::select(.data$rowId)
   ids <- as.data.frame(ids)$rowId
   charlson2to5[ids] <- 1
   charlson5plus <- rep(0, nrow(plpData$cohorts))
-  ids <- charlson$covariateData$covariates %>% dplyr::filter(covariateValue >= 5 ) %>% dplyr::select(rowId)
+  ids <- charlson$covariateData$covariates %>% dplyr::filter(.data$covariateValue >= 5 ) %>% dplyr::select(.data$rowId)
   ids <- as.data.frame(ids)$rowId
   charlson5plus[ids] <- 1
   extraX <- rbind(charlson2to5,charlson5plus)
   
   # create age 65 to <80, >=80
   age65to80 <- rep(0, nrow(plpData$cohorts))
-  ids <- plpData$cohorts %>% dplyr::filter(ageYear < 80 & ageYear >= 65 ) %>% dplyr::select(rowId)
+  ids <- plpData$cohorts %>% dplyr::filter(.data$ageYear < 80 & .data$ageYear >= 65 ) %>% dplyr::select(.data$rowId)
   ids <- as.data.frame(ids)$rowId
   age65to80[ids] <- 1
   extraX <- rbind(extraX,age65to80)
   age80plus <- rep(0, nrow(plpData$cohorts))
-  ids <- plpData$cohorts %>% dplyr::filter(ageYear >= 80 ) %>% dplyr::select(rowId)
+  ids <- plpData$cohorts %>% dplyr::filter(.data$ageYear >= 80 ) %>% dplyr::select(.data$rowId)
   ids <- as.data.frame(ids)$rowId
   age80plus[ids] <- 1
   extraX <- rbind(extraX,age80plus)

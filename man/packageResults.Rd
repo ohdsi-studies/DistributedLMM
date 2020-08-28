@@ -10,6 +10,8 @@ packageResults(outputFolder, cdmDatabaseName, minCellCount = 5)
 \item{outputFolder}{Name of folder containing the study analysis results 
 (/)}
 
+\item{cdmDatabaseName}{The name of the database}
+
 \item{minCellCount}{The minimum number of subjects contributing to a count before it can be included in the results.}
 }
 \description{

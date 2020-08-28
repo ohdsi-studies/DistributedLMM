@@ -16,9 +16,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#' DistributedLMM
-#'
-#' @docType package
-#' @name DistributedLMM
-#' @importFrom magrittr %>%
+#' @keywords internal
+"_PACKAGE"
+
+#' @import dplyr
+#' @import DatabaseConnector
+#' @importFrom utils write.csv
+#' @importFrom rlang .data
 NULL

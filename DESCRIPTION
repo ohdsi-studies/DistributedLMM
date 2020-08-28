@@ -1,34 +1,33 @@
 Package: DistributedLMM
 Type: Package
-Title: A package externally validating the OHDSI covid-19 prediction models 
+Title: Predicting Length of Hopsital Stay for COVID-19
 Version: 0.0.2
 Author: Jenna Reps [aut, cre]
 Maintainer: Jenna M Reps <reps@ohdsi.org>
-Description: A package that implements and validates various OHDSI Covid-19 prediction models
+Description: Predicting Length of Hopsital Stay for COVID-19.
 Depends:
     R (>= 3.3.0),
     DatabaseConnector
 Imports:
+    Andromeda,
     SqlRender,
-    Cyclops,
     FeatureExtraction,
     PatientLevelPrediction (>= 3.0.14),
     ggplot2,
-    ff,
-    ffbase,
     OhdsiSharing,
     zip,
     ParallelLogger,
-    magrittr,
     dplyr,
-    officer
+    rlang
 Suggests:
     knitr,
-    rmarkdown,
-    DT,
-    shiny,
-    Hydra
+    rmarkdown
+Remotes:
+    ohdsi/FeatureExtraction,
+    ohdsi/PatientLevelPrediction,
+    ohdsi/OhdsiSharing
 License: Apache License 2.0
 VignetteBuilder: knitr
 LazyData: TRUE
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
+Encoding: UTF-8

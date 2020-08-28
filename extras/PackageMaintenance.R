@@ -1,6 +1,6 @@
 # Copyright 2020 Observational Health Data Sciences and Informatics
 #
-# This file is part of SkeletonExistingPredictionModelStudy
+# This file is part of DistributedLMM
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,38 +16,22 @@
 
 # Format and check code ---------------------------------------------------
 OhdsiRTools::formatRFolder()
-OhdsiRTools::checkUsagePackage("SkeletonExistingPredictionModelStudy")
+OhdsiRTools::checkUsagePackage("DistributedLMM")
 OhdsiRTools::updateCopyrightYearFolder()
 
 # Create manual -----------------------------------------------------------
-shell("rm extras/SkeletonExistingPredictionModelStudy.pdf")
-shell("R CMD Rd2pdf ./ --output=extras/SkeletonExistingPredictionModelStudy.pdf")
+shell("rm extras/DistributedLMM.pdf")
+shell("R CMD Rd2pdf ./ --output=extras/DistributedLMM.pdf")
 
-# Create vignette ---------------------------------------------------------
-rmarkdown::render("vignettes/UsingSkeletonPackage.Rmd",
-                  output_file = "../inst/doc/UsingSkeletonPackage.pdf",
-                  rmarkdown::pdf_document(latex_engine = "pdflatex",
-                                          toc = TRUE,
-                                          number_sections = TRUE))
-
-rmarkdown::render("vignettes/PopulatingSkeletonPackage.Rmd",
-                  output_file = "../inst/doc/PopulatingSkeletonPackage.pdf",
-                  rmarkdown::pdf_document(latex_engine = "pdflatex",
-                                          toc = TRUE,
-                                          number_sections = TRUE))
 
 # Create analysis details -------------------------------------------------
 # Insert cohort definitions from ATLAS into package -----------------------
-OhdsiRTools::insertCohortDefinitionSetInPackage(fileName = "CohortsToCreate.csv",
-                                                baseUrl = "webapi",
-                                                insertTableSql = TRUE,
-                                                insertCohortCreationR = TRUE,
-                                                generateStats = FALSE,
-                                                packageName = "SkeletonExistingPredictionModelStudy")
-
-# Create analysis details -------------------------------------------------
-source("extras/CreatePredictionAnalysisDetails.R")
-createAnalysesDetails("inst/settings")
+ROhdsiWebApi::insertCohortDefinitionSetInPackage(fileName = "inst/settings/CohortsToCreate.csv",
+                                                 baseUrl = keyring::key_get("baseUrl"),
+                                                 insertTableSql = FALSE,
+                                                 insertCohortCreationR = FALSE,
+                                                 generateStats = FALSE,
+                                                 packageName = "DistributedLMM")
 
 # Store environment in which the study was executed -----------------------
-OhdsiRTools::insertEnvironmentSnapshotInPackage("SkeletonExistingPredictionModelStudy")
+OhdsiRTools::createRenvLockFile("DistributedLMM")

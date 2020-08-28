@@ -21,6 +21,7 @@
 #'
 #' @param outputFolder        Name of folder containing the study analysis results 
 #'                            (/)
+#' @param cdmDatabaseName     The name of the database
 #' @param minCellCount        The minimum number of subjects contributing to a count before it can be included in the results.
 #'
 #' @export
