@@ -38,7 +38,7 @@ install.packages("renv")
 # project, answer ‘no’.
 
 # Download the lock file:
-download.file("https://raw.githubusercontent.com/ohdsi-studies/DistributedLMM/renv/renv.lock", "renv.lock")
+download.file("https://raw.githubusercontent.com/ohdsi-studies/DistributedLMM/master/renv.lock", "renv.lock")
   
 # Build the local library:
 renv::init()
