@@ -4,3 +4,4 @@ extras
 ^\.Rprofile$
 documents
 readme.md
+renv.lock
