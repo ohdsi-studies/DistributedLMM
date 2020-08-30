@@ -120,12 +120,38 @@ createComponents <- function(plpData, charlson){
   covNames <- rbind(covNames, data.frame(columnNumber = nrow(covNames)+(1:4),
                                          name = c('Charlson:[2,5)','Charlson:>=5','age:[65,80)','age:>=80')))
   
+
   X <- as.matrix(X$data)
   extraX <- t(extraX)
   X <- cbind(X,extraX)
   
   # adding names
   colnames(X) <- covNames$name[order(covNames$columnNumber)]
+  
+  # ad missing variables (if any)
+  allVars <- c(' hypertension   days before: -9999 days after: -1',
+               ' heartDisease   days before: -9999 days after: -1',
+               ' kidneyDisease   days before: -9999 days after: -1',
+               ' diabetes   days before: -9999 days after: -1',
+               ' hyperlipidemia   days before: -9999 days after: -1',
+               ' COPD   days before: -9999 days after: -1',
+               ' cancer   days before: -9999 days after: -1',
+               ' obesity   days before: -9999 days after: -1',
+               'gender = MALE',
+               'race = White')
+  missing <- allVars[!allVars%in%colnames(X)]
+  if(length(missing)>0){
+    writeLines(paste0('adding variable ', missing))
+    for(i in 1:length(missing)){
+      X <- cbind(X, new = rep(0, nrow(X)))
+      colnames(X)[colnames(X)=='new'] <- missing[i]
+      covNames <- rbind(covNames, 
+                        c(columnNumber = ncol(X),	name = missing[i])
+                        )
+    }
+  }
+  
+  
   XX <- t(X)%*%X # gives feat x feat
   
   # must make cohort end the visit end
