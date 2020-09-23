@@ -168,7 +168,8 @@ createComponents <- function(plpData, charlson){
                  Xy = Xy,
                  yy = yy,
                  N = N,
-                 covNames = covNames
+                 covNames = covNames,
+                 missing = missing
          )
   
   return(result)

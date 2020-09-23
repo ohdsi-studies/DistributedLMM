@@ -139,6 +139,7 @@ execute <- function(connectionDetails,
     
     # save the data as csv files:
     saveLoc <- file.path(outputFolder,cdmDatabaseName)
+    write.csv(plpData$missing, file.path(saveLoc,'missing.csv' ), row.names = F)
     write.csv(plpData$XX, file.path(saveLoc,'XX.csv' ), row.names = F)
     write.csv(plpData$Xy, file.path(saveLoc,'Xy.csv'), row.names= F)
     write.csv(plpData$yy, file.path(saveLoc,'yy.csv'), row.names= F)
