@@ -7,10 +7,10 @@ Applying the Lossless Distributed Linear Mixed Model to integrate heterogeneous 
 - Study type: **Methods Research / Clinical Application**
 - Tags: **-**
 - Study lead: **-**
-- Study lead forums tag: **[[Lead tag]](https://forums.ohdsi.org/u/[Lead tag])**
+- Study lead forums tag: **Yong Chen**, **[schuemie](https://forums.ohdsi.org/u/schuemie)**, **[jreps](https://forums.ohdsi.org/u/jreps)**
 - Study start date: **Aug 12, 2020**
-- Study end date: **Aug 30, 2020**
-- Protocol: **-**
+- Study end date: **Oct 7, 2020**
+- Protocol: **[Here](https://github.com/ohdsi-studies/DistributedLMM/blob/master/extras/Lossless%20Distributed%20Linear%20Mixed%20Model.docx)**
 - Publications: **-**
 - Results explorer: **-**
 
