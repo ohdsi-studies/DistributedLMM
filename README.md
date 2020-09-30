@@ -4,12 +4,12 @@ Applying the Lossless Distributed Linear Mixed Model to integrate heterogeneous 
 <img src="https://img.shields.io/badge/Study%20Status-Started-blue.svg" alt="Study Status: Started">
 
 - Analytics use case(s): **Patient-Level Prediction**
-- Study type: **Methods Research / Clinical Application**
-- Tags: **-**
-- Study lead: **-**
+- Study type: **Clinical Application**
+- Tags: **COVID-19**
+- Study lead: **Jenna Reps, Yong Chen**
 - Study lead forums tag: **Yong Chen**, **[schuemie](https://forums.ohdsi.org/u/schuemie)**, **[jreps](https://forums.ohdsi.org/u/jreps)**
 - Study start date: **Aug 12, 2020**
-- Study end date: **Oct 7, 2020**
+- Study end date: **-**
 - Protocol: **[Here](https://github.com/ohdsi-studies/DistributedLMM/blob/master/extras/Lossless%20Distributed%20Linear%20Mixed%20Model.docx)**
 - Publications: **-**
 - Results explorer: **-**
