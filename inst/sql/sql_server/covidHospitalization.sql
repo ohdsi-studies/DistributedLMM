@@ -83,8 +83,9 @@ from
   FROM @cdm_database_schema.VISIT_OCCURRENCE vo
 JOIN #Codesets codesets on ((vo.visit_concept_id = codesets.concept_id and codesets.codeset_id = 5))
 ) C
-
-WHERE (C.visit_start_date >= DATEFROMPARTS(2020, 5, 1) and C.visit_start_date <= DATEFROMPARTS(2020, 7, 31))
+JOIN @cdm_database_schema.PERSON P on C.person_id = P.person_id
+WHERE (C.visit_start_date >= DATEFROMPARTS(2020, 1, 1) and C.visit_start_date <= DATEFROMPARTS(2020, 9, 30))
+AND YEAR(C.visit_start_date) - P.year_of_birth >= 18
 -- End Visit Occurrence Criteria
 
   ) E

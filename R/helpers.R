@@ -110,6 +110,21 @@ createComponents <- function(plpData, charlson){
   age80plus[ids] <- 1
   extraX <- rbind(extraX,age80plus)
   
+  # add Q2 and Q3 columns (April 1st – end of June; July 1st – end of September):
+  Q2 <- rep(0, nrow(plpData$cohorts))
+  ids <- plpData$cohorts %>% dplyr::filter(as.Date(.data$cohortStartDate) <= '2020-06-30' & as.Date(.data$cohortStartDate) >= '2020-04-01' ) %>% dplyr::select(.data$rowId)
+  ids <- as.data.frame(ids)$rowId
+  Q2[ids] <- 1  
+  extraX <- rbind(extraX, Q2)
+  Q3 <- rep(0, nrow(plpData$cohorts))
+  ids <- plpData$cohorts %>% dplyr::filter(as.Date(.data$cohortStartDate) <= '2020-09-30' & as.Date(.data$cohortStartDate) >= '2020-07-01' ) %>% dplyr::select(.data$rowId)
+  ids <- as.data.frame(ids)$rowId
+  Q3[ids] <- 1
+  extraX <- rbind(extraX, Q3)
+  
+  # add intercept column of 1s:
+  extraX <- rbind(extraX,rep(1, nrow(plpData$cohorts)))
+  
   # convert to matrix
   X <- PatientLevelPrediction::toSparseM(plpData = plpData, population = plpData$cohorts)
   features <- X$map
@@ -117,8 +132,9 @@ createComponents <- function(plpData, charlson){
   
   covNames <- merge(features, covariateRef, by.x = 'oldCovariateId', by.y = 'covariateId')[,c('newCovariateId','covariateName')]
   colnames(covNames) <- c('columnNumber','name')
-  covNames <- rbind(covNames, data.frame(columnNumber = nrow(covNames)+(1:4),
-                                         name = c('Charlson:[2,5)','Charlson:>=5','age:[65,80)','age:>=80')))
+  covNames <- rbind(covNames, data.frame(columnNumber = nrow(covNames)+(1:7),
+                                         name = c('Charlson:[2,5)','Charlson:>=5','age:[65,80)','age:>=80',
+                                                  'Q2','Q3','intercept')))
   
 
   X <- as.matrix(X$data)

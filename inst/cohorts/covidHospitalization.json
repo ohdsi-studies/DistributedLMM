@@ -175,9 +175,13 @@
         "VisitOccurrence": {
           "CodesetId": 5,
           "OccurrenceStartDate": {
-            "Value": "2020-05-01",
-            "Extent": "2020-07-31",
+            "Value": "2020-01-01",
+            "Extent": "2020-09-30",
             "Op": "bt"
+          },
+          "Age": {
+            "Value": 18,
+            "Op": "gte"
           }
         }
       }
