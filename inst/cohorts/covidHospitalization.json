@@ -449,7 +449,7 @@
   },
   "InclusionRules": [
     {
-      "name": "has >=365 prior observation",
+      "name": "has >=180 day prior observation",
       "expression": {
         "Type": "ALL",
         "CriteriaList": [
@@ -462,7 +462,7 @@
                 "Coeff": -1
               },
               "End": {
-                "Days": 365,
+                "Days": 180,
                 "Coeff": -1
               },
               "UseEventEnd": false
@@ -480,6 +480,36 @@
             "Occurrence": {
               "Type": 2,
               "Count": 1
+            }
+          }
+        ],
+        "DemographicCriteriaList": [],
+        "Groups": []
+      }
+    },
+    {
+      "name": "No death during visit (or 14 days after it)",
+      "expression": {
+        "Type": "ALL",
+        "CriteriaList": [
+          {
+            "Criteria": {
+              "Death": {}
+            },
+            "StartWindow": {
+              "Start": {
+                "Coeff": -1
+              },
+              "End": {
+                "Days": 14,
+                "Coeff": 1
+              },
+              "UseIndexEnd": true,
+              "UseEventEnd": false
+            },
+            "Occurrence": {
+              "Type": 0,
+              "Count": 0
             }
           }
         ],
